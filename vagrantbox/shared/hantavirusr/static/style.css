@@ -1,0 +1,51 @@
+/* Dashboard Elements */
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+/* Data Table Styling */
+.patient-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.patient-table th, .patient-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.patient-table th {
+    background-color: #2c3e50;
+    color: white;
+}
+
+/* Status Badges */
+.badge {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 0.85em;
+}
+.status-confirmed { background-color: #f8d7da; color: #721c24; }
+.status-suspected { background-color: #fff3cd; color: #856404; }
+.status-recovered { background-color: #d4edda; color: #155724; }
+
+/* Buttons */
+.action-btn {
+    background: #27ae60;
+    color: white;
+    padding: 8px 16px;
+    text-decoration: none;
+    border-radius: 4px;
+}
+.edit-link {
+    color: #2980b9;
+    text-decoration: none;
+}

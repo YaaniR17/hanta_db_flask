@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Edit Record for {{ patient['Firstname'] }} {{ patient['Lastname'] }}{% endblock %}</h1>
+{% block endblock %}
+
+{% block content %}
+  <!-- Update Form -->
+  <form method="post" class="patient-form">
+    
+    <label for="firstname">First Name</label>
+    <input name="firstname" id="firstname" value="{{ request.form['firstname'] or patient['Firstname'] }}" required>
+
+    <label for="lastname">Last Name</label>
+    <input name="lastname" id="lastname" value="{{ request.form['lastname'] or patient['Lastname'] }}" required>
+
+    <label for="age">Age</label>
+    <input type="number" name="age" id="age" value="{{ request.form['age'] or patient['Age'] }}">
+
+    <label for="date_of_admission">Date of Admission</label>
+    <input type="date" name="date_of_admission" id="date_of_admission" value="{{ request.form['date_of_admission'] or patient['Date_of_Admission'] }}" required>
+
+    <label for="infection_status">Infection Status</label>
+    <select name="infection_status" id="infection_status">
+        <option value="Suspected" {% if (request.form['infection_status'] or patient['Infection_Status']) == 'Suspected' %}selected{% endif %}>Suspected Case</option>
+        <option value="Confirmed" {% if (request.form['infection_status'] or patient['Infection_Status']) == 'Confirmed' %}selected{% endif %}>Confirmed Case</option>
+        <option value="Recovered" {% if (request.form['infection_status'] or patient['Infection_Status']) == 'Recovered' %}selected{% endif %}>Recovered / Discharged</option>
+    </select>
+
+    <input type="submit" value="Save Changes">
+  </form>
+
+  <hr>
+
+  <!-- Delete Form -->
+  <form action="{{ url_for('patients.delete', id=patient['ID']) }}" method="post">
+    <input class="danger-btn" type="submit" value="Delete Patient Record" onclick="return confirm('Are you sure you want to permanently delete this record?');">
+  </form>
+{% endblock %}

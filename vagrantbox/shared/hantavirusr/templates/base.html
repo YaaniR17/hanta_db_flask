@@ -1,0 +1,51 @@
+{# Set the page title clearly at the top #}
+{% block title %}Hantavirus Patient Dashboard{% endblock %}
+
+{% block header %}
+  <div class="dashboard-header">
+    <h1>Hantavirus Patient Dashboard</h1>
+    <a class="action-btn" href="{{ url_for('patients.create') }}">Add New Patient</a>
+  </div>
+{% endblock %}
+
+{% block content %}
+  {% if patients %}
+    <div class="table-container">
+      <table class="patient-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Patient Name</th>
+            <th>Age</th>
+            <th>Admission Date</th>
+            <th>Infection Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for patient in patients %}
+            <tr>
+              <td>#{{ patient['ID'] }}</td>
+              <td><strong>{{ patient['Lastname'] }}</strong>, {{ patient['Firstname'] }}</td>
+              <td>{{ patient['Age'] if patient['Age'] else 'N/A' }}</td>
+              <td>{{ patient['Date_of_Admission'] }}</td>
+              <td>
+                <span class="badge status-{{ patient['Infection_Status'] | lower }}">
+                  {{ patient['Infection_Status'] }}
+                </span>
+              </td>
+              <td>
+                <a class="edit-link" href="{{ url_for('patients.update', id=patient['ID']) }}">Edit</a>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <div class="empty-state">
+      <p>No patient records found in the tracking database.</p>
+      <a class="action-btn" href="{{ url_for('patients.create') }}">Create First Record</a>
+    </div>
+  {% endif %}
+{% endblock %}
