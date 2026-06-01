@@ -2,23 +2,20 @@ from flask import (
     Blueprint, flash, g, redirect, render_template, request, url_for
 )
 from werkzeug.exceptions import abort
-
 from hantavirusr.auth import login_required
 from hantavirusr.db import get_db
-
-
 bp = Blueprint('patients', __name__)
 
+# Index:
 @bp.route('/')
 def index():
     db = get_db()
-    posts = db.execute(
-        'SELECT p.id, title, body, created, author_id, username'
-        ' FROM post p JOIN user u ON p.author_id = u.id'
-        ' ORDER BY created DESC'
+    patients = db.execute(
+        'SELECT * FROM Patients ORDER BY Date_of_Admission DESC'
     ).fetchall()
-    return render_template('patients/index.html', posts=posts)
+    return render_template('patients/index.html', patients=patients)
 
+# Create:
 @bp.route('/create', methods=('GET', 'POST'))
 @login_required
 def create():
@@ -47,24 +44,25 @@ def create():
 
     return render_template('patients/create.html')
 
-
-def get_patient(id):
+# Get patient:
+def get_patient(ID):
     patient = get_db().execute(
-        'SELECT id, first_name, last_name, status, notes, admission_date'
-        ' FROM patient'
+        'SELECT id, Firstname, Lastname, Age, Date_of_Admission, Infection_Status'
+        ' FROM Patients'
         ' WHERE id = ?',
-        (id,)
+        (ID,)
     ).fetchone()
 
     if patient is None:
-        abort(404, f"Patient id {id} doesn't exist.")
+        abort(404, f"Patient id {ID} doesn't exist.")
 
     return patient
 
+# Update:
 @bp.route('/<int:id>/update', methods=('GET', 'POST'))
 @login_required
 def update(id):
-    patient = get_patient(id) # Uses the helper function we made earlier
+    patient = get_patient(ID=id) # Uses the helper function we made earlier
 
     if request.method == 'POST':
         firstname = request.form['firstname']
@@ -84,7 +82,7 @@ def update(id):
             db.execute(
                 'UPDATE Patients SET Firstname = ?, Lastname = ?, Age = ?, Date_of_Admission = ?, Infection_Status = ?'
                 ' WHERE ID = ?',
-                (firstname, lastname, age, date_of_admission, infection_status, id)
+                (firstname, lastname, age, date_of_admission, infection_status, ID)
             )
             db.commit()
             return redirect(url_for('patients.index'))
@@ -92,40 +90,12 @@ def update(id):
     return render_template('patients/update.html', patient=patient)
 
 
-
-def get_post(id, check_author=True):
-    post = get_db().execute(
-        'SELECT p.id, title, body, created, author_id, username'
-        ' FROM post p JOIN user u ON p.author_id = u.id'
-        ' WHERE p.id = ?',
-        (id,)
-    ).fetchone()
-
-    if post is None:
-        abort(404, f"Post id {id} doesn't exist.")
-
-    if check_author and post['author_id'] != g.user['id']:
-        abort(403)
-
-    return post
-
-
+# Delete:
 @bp.route('/<int:id>/delete', methods=('POST',))
 @login_required
-def delete(id):
-    get_patient(id) # Ensures the patient exists first
+def delete(ID):
+    get_patient(ID=ID) # Ensures the patient exists first
     db = get_db()
-    db.execute('DELETE FROM patient WHERE id = ?', (id,))
+    db.execute('DELETE FROM Patients WHERE id = ?', (ID,))
     db.commit()
     return redirect(url_for('patients.index'))
-
-
-
-bp = Blueprint('patients', __name__)
-
-@bp.route('/')
-@login_required
-def index():
-    db = get_db()
-    patients = db.execute('SELECT * FROM Patients ORDER BY Date_of_Admission DESC').fetchall()
-    return render_template('patients/index.html', patients=patients)

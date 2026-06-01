@@ -1,28 +1,43 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 
 {% block header %}
-  <h1>{% block title %}Posts{% endblock %}</h1>
-  {% if g.user %}
-    <a class="action" href="{{ url_for('patients.create') }}">New</a>
-  {% endif %}
+  <h1>Patients</h1>
+  <a class="action" href="{{ url_for('patients.create') }}">New</a>
 {% endblock %}
 
 {% block content %}
-  {% for post in posts %}
-    <article class="post">
-      <header>
-        <div>
-          <h1>{{ post['title'] }}</h1>
-          <div class="about">by {{ post['username'] }} on {{ post['created'].strftime('%Y-%m-%d') }}</div>
-        </div>
-        {% if g.user['id'] == post['author_id'] %}
-          <a class="action" href="{{ url_for('patients.update', id=post['id']) }}">Edit</a>
-        {% endif %}
-      </header>
-      <p class="body">{{ post['body'] }}</p>
-    </article>
-    {% if not loop.last %}
-      <hr>
-    {% endif %}
-  {% endfor %}
+
+<table>
+  <thead>
+    <tr>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Age</th>
+      <th>Date of Admission</th>
+      <th>Status</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    {% for patient in patients %}
+    <tr>
+      <td>{{ patient['Firstname'] }}</td>
+      <td>{{ patient['Lastname'] }}</td>
+      <td>{{ patient['Age'] }}</td>
+      <td>{{ patient['Date_of_Admission'] }}</td>
+      <td>{{ patient['Infection_Status'] }}</td>
+
+      <td>
+        <a href="{{ url_for('patients.update', id=patient['id']) }}">Edit</a>
+
+        <form method="POST" action="{{ url_for('patients.delete', id=patient['id']) }}" style="display:inline;">
+          <button type="submit">Delete</button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
 {% endblock %}

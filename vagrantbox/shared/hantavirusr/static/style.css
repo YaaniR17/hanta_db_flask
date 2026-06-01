@@ -1,4 +1,74 @@
-/* Dashboard Elements */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f6f8;
+    color: #333;
+}
+
+header {
+    background: #0058cc;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+nav {
+    background: #32363a;
+    padding: 10px;
+    display: flex;
+    gap: 15px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+}
+
+nav a:hover {
+    background: #2c3e50;
+}
+
+main {
+    padding: 20px;
+}
+
+form {
+    background: white;
+    max-width: 400px;
+    margin: 40px auto;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+form label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+form input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+form input[type="submit"] {
+    margin-top: 20px;
+    background: #27ae60;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+form input[type="submit"]:hover {
+    background: #219150;
+}
+
 .dashboard-header {
     display: flex;
     justify-content: space-between;
@@ -6,46 +76,73 @@
     margin-bottom: 20px;
 }
 
-/* Data Table Styling */
-.patient-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
-    background: #fff;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-}
-
-.patient-table th, .patient-table td {
-    padding: 12px 15px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-}
-
-.patient-table th {
-    background-color: #2c3e50;
-    color: white;
-}
-
-/* Status Badges */
-.badge {
-    padding: 4px 8px;
-    border-radius: 4px;
-    font-weight: bold;
-    font-size: 0.85em;
-}
-.status-confirmed { background-color: #f8d7da; color: #721c24; }
-.status-suspected { background-color: #fff3cd; color: #856404; }
-.status-recovered { background-color: #d4edda; color: #155724; }
-
-/* Buttons */
 .action-btn {
     background: #27ae60;
     color: white;
-    padding: 8px 16px;
+    padding: 10px 15px;
     text-decoration: none;
-    border-radius: 4px;
+    border-radius: 5px;
 }
+
+.action-btn:hover {
+    background: #219150;
+}
+
 .edit-link {
     color: #2980b9;
     text-decoration: none;
+}
+
+.edit-link:hover {
+    text-decoration: underline;
+}
+
+.patient-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.patient-table th,
+.patient-table td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+}
+
+.patient-table th {
+    background: #2c3e50;
+    color: white;
+}
+
+.badge {
+    padding: 4px 8px;
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.status-confirmed {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.status-suspected {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.status-recovered {
+    background: #d4edda;
+    color: #155724;
+}
+
+/* =========================
+   EMPTY STATE
+========================= */
+
+.empty-state {
+    text-align: center;
+    margin-top: 50px;
 }
