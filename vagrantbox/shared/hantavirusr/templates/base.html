@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}{% endblock %}</title>
+    <title>Home Page</title>
 
     <link rel="stylesheet"
           href="{{ url_for('static', filename='style.css') }}">
@@ -11,19 +11,23 @@
 <body>
 
     <header>
-        <h1>Hantavirus Patient Database</h1>
+        <center><h1>Hantavirus Patient Database</h1></center>
     </header>
-
     <nav>
-        <a href="{{ url_for('patients.index') }}">Patients</a>
-        <a href="{{ url_for('auth.login') }}">Login</a>
-        <a href="{{ url_for('auth.register') }}">Register</a>
+      <ul>
+       {% if g.user %}
+        <li><span class="user-profile-text">{{ g.user['username'] }}</span></li>
+        <li><a href="{{ url_for('patients.index') }}">Patients</a></li>
+        <li><a href="{{ url_for('auth.logout') }}">Log Out</a></li>
+        
+       {% else %}
+       {% block content %}{% endblock %}
+        <li><a href="{{ url_for('auth.register') }}">Register</a></li>
+        <li><a href="{{ url_for('auth.login') }}">Login</a></li>
+        <li><a href="{{ url_for('patients.index') }}">Patients</a></li>
+       {% endif %}
+      </ul>
     </nav>
-
-    <main>
-        {% block header %}{% endblock %}
-        {% block content %}{% endblock %}
-    </main>
-
+    
 </body>
 </html>

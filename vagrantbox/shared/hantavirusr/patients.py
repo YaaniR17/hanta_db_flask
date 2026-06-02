@@ -13,7 +13,7 @@ bp = Blueprint('patients', __name__)
 def index():
     db = get_db()
     patients = db.execute('SELECT * FROM Patients ORDER BY Date_of_Admission DESC').fetchall()
-    return render_template('patients.html', patients=patients)
+    return render_template('auth/login.html', patients=patients)
 
 
 # Create:
@@ -59,6 +59,10 @@ def get_patient(id):
 
     return patient
 
+
+@bp.route('/')
+def home():
+    return render_template('base.html')
 
 # Update:
 @bp.route('/<int:id>/update', methods=('GET', 'POST'))

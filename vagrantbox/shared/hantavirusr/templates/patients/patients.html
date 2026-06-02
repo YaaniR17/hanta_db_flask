@@ -1,9 +1,12 @@
 {% block header %}
-  <h1>{% block title %}Patients{% endblock %}</h1>
+  <div class="header-container"></div>
+    <center><h1>{% block title %}Hantavirus - Patients {% endblock %}</h1></center>
+    <a href="base2.html">Home</a>
 {% endblock %}
 
 {% block content %}
-  <a class="action" href="{{ url_for('patients.create') }}">New</a>
+      <link rel="stylesheet"
+          href="{{ url_for('static', filename='patient.css') }}">
 
   <table class="patient-table">
     <thead>

@@ -20,18 +20,14 @@ def create_app(test_config=None):
     # ensure the instance folder exists
     os.makedirs(app.instance_path, exist_ok=True)
 
-    # a simple page that says hello
-    #@app.route('/hello')
-    #def hello():
-    #   return 'Hello World, I have created the database webpage!'
-
     from . import db
     from . import auth
     from . import patients
+    
     app.register_blueprint(auth.bp)
     db.init_app(app)
     app.register_blueprint(patients.bp)
-    app.add_url_rule('/', endpoint='index')
+    #app.add_url_rule('/', endpoint='index')
 
 
     return app

@@ -1,0 +1,7 @@
+I need to make it so that register first.
+Then login.
+Then it asks you for your name if it doesn't recognise your name it will ask you to fill a form.
+Then you are added to the database.
+Then if you click on patients tab then log in with a special password it will show all patient info.
+Then if you click more detail then it will ask you for a different special password for authorised personal only.
+You can then either manually add patients or generate them, edit, delete and save patient info.

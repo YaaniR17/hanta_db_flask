@@ -1,148 +1,68 @@
+/* Core Styling & Typography */
 body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #f4f6f8;
-    color: #333;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f0f4f5; /* Official NHS light gray background */
+  color: #212b32; /* NHS text dark gray */
 }
 
+/* NHS Blue Header Bar */
 header {
-    background: #0058cc;
-    color: white;
-    padding: 20px;
-    text-align: center;
+  background-color: #005eb8; /* Official NHS Blue */
+  padding: 16px 24px;
+  box-shadow: 0 4px 0 #002f5c; /* Subdued bottom accent border */
 }
 
+header h1 {
+  color: #ffffff;
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+/* NHS Navigation Bar Layout */
 nav {
-    background: #32363a;
-    padding: 10px;
-    display: flex;
-    gap: 15px;
+  background-color: #ffffff;
+  border-bottom: 4px solid #d8dde0; /* Clean border line separator */
+  padding: 0 24px;
 }
 
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+nav li {
+  margin: 0;
+}
+
+/* Nav Link Items */
 nav a {
-    color: white;
-    text-decoration: none;
-    padding: 8px 12px;
-    border-radius: 4px;
+  display: inline-block;
+  color: #005eb8; /* Blue interaction color */
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 16px;
+  padding: 16px 20px;
+  border-bottom: 4px solid transparent;
+  transition: background-color 0.15s, border-color 0.15s;
 }
 
+/* NHS Interaction Focus & Hover Effects */
 nav a:hover {
-    background: #2c3e50;
+  background-color: #f0f4f5;
+  color: #003078; /* Darker blue focus hover */
+  border-bottom-color: #005eb8;
 }
 
-main {
-    padding: 20px;
-}
-
-form {
-    background: white;
-    max-width: 400px;
-    margin: 40px auto;
-    padding: 25px;
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-}
-
-form label {
-    display: block;
-    margin-top: 10px;
-    font-weight: bold;
-}
-
-form input {
-    width: 100%;
-    padding: 10px;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-form input[type="submit"] {
-    margin-top: 20px;
-    background: #27ae60;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
-
-form input[type="submit"]:hover {
-    background: #219150;
-}
-
-.dashboard-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-.action-btn {
-    background: #27ae60;
-    color: white;
-    padding: 10px 15px;
-    text-decoration: none;
-    border-radius: 5px;
-}
-
-.action-btn:hover {
-    background: #219150;
-}
-
-.edit-link {
-    color: #2980b9;
-    text-decoration: none;
-}
-
-.edit-link:hover {
-    text-decoration: underline;
-}
-
-.patient-table {
-    width: 100%;
-    border-collapse: collapse;
-    background: white;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-}
-
-.patient-table th,
-.patient-table td {
-    padding: 12px;
-    border-bottom: 1px solid #ddd;
-    text-align: left;
-}
-
-.patient-table th {
-    background: #2c3e50;
-    color: white;
-}
-
-.badge {
-    padding: 4px 8px;
-    border-radius: 5px;
-    font-size: 12px;
-    font-weight: bold;
-}
-
-.status-confirmed {
-    background: #f8d7da;
-    color: #721c24;
-}
-
-.status-suspected {
-    background: #fff3cd;
-    color: #856404;
-}
-
-.status-recovered {
-    background: #d4edda;
-    color: #155724;
-}
-
-/* =========================
-   EMPTY STATE
-========================= */
-
-.empty-state {
-    text-align: center;
-    margin-top: 50px;
+nav a:active,
+nav a:focus {
+  background-color: #ffdd00; /* Distinct NHS Yellow focus block style */
+  color: #212b32;
+  border-bottom-color: #212b32;
+  outline: none;
 }

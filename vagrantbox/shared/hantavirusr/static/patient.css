@@ -1,0 +1,99 @@
+/* Base Styles */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 20px;
+  background-color: #f5f7fa;
+  color: #333;
+}
+
+/* Header & Title Bar */
+h1 {
+  background-color: #0078d4;
+  color: #ffffff;
+  margin: -20px -20px 20px -20px;
+  padding: 20px;
+  font-size: 24px;
+  font-weight: 600;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Action Button ("New") */
+.action {
+  display: inline-block;
+  background-color: #107c41;
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  transition: background-color 0.2s;
+}
+
+.action:hover {
+  background-color: #0b5930;
+}
+
+/* Patient Data Table */
+.patient-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #ffffff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+.patient-table th {
+  background-color: #f0f4f8;
+  color: #4a5568;
+  text-align: left;
+  padding: 14px 16px;
+  font-weight: 600;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.patient-table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid #e2e8f0;
+  color: #4a5568;
+  vertical-align: middle;
+}
+
+.patient-table tbody tr:hover {
+  background-color: #f8fafc;
+}
+
+/* Action Buttons (Edit / Delete) */
+.btn-edit, 
+.btn-delete {
+  display: inline-block;
+  padding: 6px 12px;
+  font-size: 14px;
+  border-radius: 4px;
+  text-decoration: none;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.btn-edit {
+  background-color: #eff6ff;
+  color: #1d4ed8;
+  border: 1px solid #bfdbfe;
+  margin-right: 8px;
+}
+
+.btn-edit:hover {
+  background-color: #dbeafe;
+}
+
+.btn-delete {
+  background-color: #fef2f2;
+  color: #dc2626;
+  border: 1px solid #fecaca;
+}
+
+.btn-delete:hover {
+  background-color: #fee2e2;
+}
