@@ -1,15 +1,42 @@
-<!doctype html>
-<title>{% block title %}{% endblock %} - hantavirusr</title>
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-<nav>
-  <h1>Hantavirus Patients</h1>
-</nav>
-<section class="content">
-  <header>
-    {% block header %}{% endblock %}
-  </header>
-  {% for message in get_flashed_messages() %}
-    <div class="flash">{{ message }}</div>
-  {% endfor %}
-  {% block content %}{% endblock %}
-</section>
+{% block header %}
+  <h1>{% block title %}Patients{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  <a class="action" href="{{ url_for('patients.create') }}">New</a>
+
+  <table class="patient-table">
+    <thead>
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Age</th>
+        <th>Date of Admission</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for patient in patients %}
+        <tr>
+          <td>{{ patient['Firstname'] }}</td>
+          <td>{{ patient['Lastname'] }}</td>
+          <td>{{ patient['Age'] }}</td>
+          <td>{{ patient['Date_of_Admission'] }}</td>
+          <td>{{ patient['Infection_Status'] }}</td>
+          <td>
+            <a class="btn-edit" href="{{ url_for('patients.update', id=patient['id']) }}">Edit</a>
+            
+            <form action="{{ url_for('patients.delete', id=patient['id']) }}" method="post" style="display: inline;">
+              <input class="btn-delete" type="submit" value="Delete" onclick="return confirm('Are you sure you want to delete this patient?');">
+            </form>
+          </td>
+        </tr>
+      {% else %}
+        <tr>
+          <td colspan="6" style="text-align: center;">No patients found in the database.</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

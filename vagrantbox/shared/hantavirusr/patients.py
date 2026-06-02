@@ -4,16 +4,17 @@ from flask import (
 from werkzeug.exceptions import abort
 from hantavirusr.auth import login_required
 from hantavirusr.db import get_db
+
 bp = Blueprint('patients', __name__)
 
 # Index:
 @bp.route('/')
+@login_required
 def index():
     db = get_db()
-    patients = db.execute(
-        'SELECT * FROM Patients ORDER BY Date_of_Admission DESC'
-    ).fetchall()
-    return render_template('patients/index.html', patients=patients)
+    patients = db.execute('SELECT * FROM Patients ORDER BY Date_of_Admission DESC').fetchall()
+    return render_template('patients.html', patients=patients)
+
 
 # Create:
 @bp.route('/create', methods=('GET', 'POST'))
@@ -44,25 +45,26 @@ def create():
 
     return render_template('patients/create.html')
 
-# Get patient:
-def get_patient(ID):
+
+def get_patient(id):
     patient = get_db().execute(
         'SELECT id, Firstname, Lastname, Age, Date_of_Admission, Infection_Status'
         ' FROM Patients'
         ' WHERE id = ?',
-        (ID,)
+        (id,)
     ).fetchone()
 
     if patient is None:
-        abort(404, f"Patient id {ID} doesn't exist.")
+        abort(404, f"Patient id {id} doesn't exist.")
 
     return patient
+
 
 # Update:
 @bp.route('/<int:id>/update', methods=('GET', 'POST'))
 @login_required
 def update(id):
-    patient = get_patient(ID=id) # Uses the helper function we made earlier
+    patient = get_patient(id)
 
     if request.method == 'POST':
         firstname = request.form['firstname']
@@ -81,8 +83,8 @@ def update(id):
             db = get_db()
             db.execute(
                 'UPDATE Patients SET Firstname = ?, Lastname = ?, Age = ?, Date_of_Admission = ?, Infection_Status = ?'
-                ' WHERE ID = ?',
-                (firstname, lastname, age, date_of_admission, infection_status, ID)
+                ' WHERE id = ?',
+                (firstname, lastname, age, date_of_admission, infection_status, id)
             )
             db.commit()
             return redirect(url_for('patients.index'))
@@ -93,9 +95,9 @@ def update(id):
 # Delete:
 @bp.route('/<int:id>/delete', methods=('POST',))
 @login_required
-def delete(ID):
-    get_patient(ID=ID) # Ensures the patient exists first
+def delete(id):
+    get_patient(id) 
     db = get_db()
-    db.execute('DELETE FROM Patients WHERE id = ?', (ID,))
+    db.execute('DELETE FROM Patients WHERE id = ?', (id,))
     db.commit()
     return redirect(url_for('patients.index'))

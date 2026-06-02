@@ -1,19 +1,9 @@
 DROP TABLE IF EXISTS user;
-DROP TABLE IF EXISTS post;
 
 CREATE TABLE user (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   username TEXT UNIQUE NOT NULL,
   password TEXT NOT NULL
-);
-
-CREATE TABLE post (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  author_id INTEGER NOT NULL,
-  created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  title TEXT NOT NULL,
-  body TEXT NOT NULL,
-  FOREIGN KEY (author_id) REFERENCES user (id)
 );
 
 CREATE TABLE Patients (
@@ -48,16 +38,6 @@ CREATE TABLE Laboratory_Tests (
     Result TEXT,
     IgM_Level REAL,
     Platelet_Count INTEGER,
-    FOREIGN KEY (Patient_ID) REFERENCES Patients(ID)
-);
-
-CREATE TABLE Environmental_Exposure (
-    Exposure_ID INTEGER PRIMARY KEY,
-    Patient_ID INTEGER,
-    Location_Type TEXT,
-    Animal_Contact_Confirmed BOOLEAN,
-    Recent_Activity TEXT,
-    Exposure_Date TEXT,
     FOREIGN KEY (Patient_ID) REFERENCES Patients(ID)
 );
 
