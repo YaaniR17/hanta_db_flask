@@ -64,7 +64,7 @@ def login():
 
 @bp.route('/')
 def home():
-    return render_template('templates/patients.html')
+    return render_template('home.html')
 
 @bp.before_app_request
 def load_logged_in_user():
@@ -81,7 +81,7 @@ def load_logged_in_user():
 @bp.route('/logout')
 def logout():
     session.clear()
-    return redirect(url_for('patients.index'))
+    return redirect(url_for('home'))
 
 def login_required(view):
     @functools.wraps(view)

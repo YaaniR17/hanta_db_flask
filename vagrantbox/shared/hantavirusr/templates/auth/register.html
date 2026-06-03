@@ -1,15 +1,29 @@
 {% extends 'base.html' %}
 
-{% block header %}
-  <h1>{% block title %}Register{% endblock %}</h1>
-{% endblock %}
+{% block title %}Register Page{% endblock %}
 
 {% block content %}
-  <form method="post">
-    <label for="username">Username</label>
-    <input name="username" id="username" required>
-    <label for="password">Password</label>
-    <input type="password" name="password" id="password" required>
-    <input type="submit" value="Register">
-  </form>
+<div class="content">
+  <div class="form-container">
+    <h2>Register</h2>
+
+    {% for message in get_flashed_messages() %}
+      <div class="error">{{ message }}</div>
+    {% endfor %}
+
+    <form method="post">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input name="username" id="username" required>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" required>
+      </div>
+      <input type="submit" value="Register" class="btn-submit">
+    </form>
+
+    <p class="form-footer">Already have an account? <a href="{{ url_for('auth.login') }}">Log in here</a></p>
+  </div>
+</div>
 {% endblock %}

@@ -1,17 +1,15 @@
-/* Core Styling & Typography */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #f0f4f5; /* Official NHS light gray background */
-  color: #212b32; /* NHS text dark gray */
+  background-color: #f0f4f5;
+  color: #212b32;
 }
 
-/* NHS Blue Header Bar */
 header {
-  background-color: #005eb8; /* Official NHS Blue */
+  background-color: #005eb8;
   padding: 16px 24px;
-  box-shadow: 0 4px 0 #002f5c; /* Subdued bottom accent border */
+  box-shadow: 0 4px 0 #002f5c;
 }
 
 header h1 {
@@ -22,10 +20,9 @@ header h1 {
   letter-spacing: -0.5px;
 }
 
-/* NHS Navigation Bar Layout */
 nav {
   background-color: #ffffff;
-  border-bottom: 4px solid #d8dde0; /* Clean border line separator */
+  border-bottom: 4px solid #d8dde0;
   padding: 0 24px;
 }
 
@@ -40,10 +37,9 @@ nav li {
   margin: 0;
 }
 
-/* Nav Link Items */
 nav a {
   display: inline-block;
-  color: #005eb8; /* Blue interaction color */
+  color: #005eb8;
   text-decoration: none;
   font-weight: 600;
   font-size: 16px;
@@ -52,17 +48,260 @@ nav a {
   transition: background-color 0.15s, border-color 0.15s;
 }
 
-/* NHS Interaction Focus & Hover Effects */
 nav a:hover {
   background-color: #f0f4f5;
-  color: #003078; /* Darker blue focus hover */
+  color: #003078;
   border-bottom-color: #005eb8;
 }
 
 nav a:active,
 nav a:focus {
-  background-color: #ffdd00; /* Distinct NHS Yellow focus block style */
+  background-color: #ffdd00;
   color: #212b32;
   border-bottom-color: #212b32;
   outline: none;
+}
+
+.content {
+  width: 100%;
+  padding: 8px 20px;
+  box-sizing: border-box;
+}
+
+.content h2 {
+  font-size: 32px;
+  color: #005eb8;
+  padding-bottom: 12px;
+  margin-top: 8px;
+  margin-bottom: 12px;
+}
+
+.content h3 {
+  font-size: 20px;
+  color: #212b32;
+  margin-top: 32px;
+  margin-bottom: 8px;
+}
+
+.content p {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #425563;
+}
+
+.notice {
+  background-color: #fff9c4;
+  border-left: 6px solid #ffdd00;
+  padding: 16px 20px;
+  margin-top: 32px;
+  font-size: 15px;
+  color: #212b32;
+}
+
+.patient-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #ffffff;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  margin: 24px 0;
+}
+
+.patient-table th {
+  background-color: #005eb8;
+  color: #ffffff;
+  text-align: left;
+  padding: 14px 16px;
+  font-weight: 600;
+  border-bottom: 2px solid #003078;
+}
+
+.patient-table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid #d8dde0;
+  color: #212b32;
+  vertical-align: middle;
+}
+
+.patient-table tbody tr:hover {
+  background-color: #f0f4f5;
+}
+
+.btn-edit, .btn-delete {
+  display: inline-block;
+  padding: 6px 12px;
+  font-size: 14px;
+  border-radius: 4px;
+  text-decoration: none;
+  cursor: pointer;
+  font-weight: 500;
+  border: none;
+}
+
+.btn-edit {
+  background-color: #005eb8;
+  color: #ffffff;
+  margin-right: 8px;
+}
+
+.btn-edit:hover {
+  background-color: #003078;
+}
+
+.btn-delete {
+  background-color: #da291c;
+  color: #ffffff;
+}
+
+.btn-delete:hover {
+  background-color: #8c1a12;
+}
+
+.btn-add {
+  display: inline-block;
+  background-color: #007f3b;
+  color: #ffffff;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: bold;
+  margin: 24px 0;
+}
+
+.btn-add:hover {
+  background-color: #00572a;
+}
+
+.search-bar {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.search-bar input {
+  padding: 10px 14px;
+  font-size: 15px;
+  border: 2px solid #d8dde0;
+  border-radius: 4px;
+  width: 300px;
+}
+
+.search-bar button {
+  padding: 10px 20px;
+  background-color: #005eb8;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.search-bar button:hover {
+  background-color: #003078;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.action-btn {
+  padding: 10px 24px;
+  background-color: #005eb8;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 15px;
+  cursor: pointer;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.action-btn:hover {
+  background-color: #003078;
+}
+
+.btn-close {
+  background-color: #da291c;
+}
+
+.btn-close:hover {
+  background-color: #8c1a12;
+}
+
+.form-container {
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 40px;
+  max-width: 450px;
+  margin: 40px auto;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.form-container h2 {
+  color: #005eb8;
+  margin-bottom: 24px;
+  font-size: 24px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+}
+
+.form-group label {
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #212b32;
+}
+
+.form-group input {
+  padding: 10px 14px;
+  font-size: 15px;
+  border: 2px solid #d8dde0;
+  border-radius: 4px;
+}
+
+.form-group input:focus {
+  border-color: #005eb8;
+  outline: none;
+}
+
+.btn-submit {
+  width: 100%;
+  padding: 12px;
+  background-color: #005eb8;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 8px;
+}
+
+.btn-submit:hover {
+  background-color: #003078;
+}
+
+.form-footer {
+  text-align: center;
+  margin-top: 16px;
+  color: #425563;
+}
+
+.form-footer a {
+  color: #005eb8;
+  font-weight: 600;
+}
+
+.error {
+  background-color: #fef2f2;
+  border-left: 4px solid #da291c;
+  color: #da291c;
+  padding: 10px 14px;
+  margin-bottom: 16px;
+  border-radius: 4px;
 }

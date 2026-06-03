@@ -13,7 +13,7 @@ bp = Blueprint('patients', __name__)
 def index():
     db = get_db()
     patients = db.execute('SELECT * FROM Patients ORDER BY Date_of_Admission DESC').fetchall()
-    return render_template('auth/login.html', patients=patients)
+    return render_template('patients/patients.html', patients=patients)
 
 
 # Create:
@@ -45,7 +45,7 @@ def create():
 
     return render_template('patients/create.html')
 
-
+# Get Patient:
 def get_patient(id):
     patient = get_db().execute(
         'SELECT id, Firstname, Lastname, Age, Date_of_Admission, Infection_Status'
@@ -58,11 +58,6 @@ def get_patient(id):
         abort(404, f"Patient id {id} doesn't exist.")
 
     return patient
-
-
-@bp.route('/')
-def home():
-    return render_template('base.html')
 
 # Update:
 @bp.route('/<int:id>/update', methods=('GET', 'POST'))
