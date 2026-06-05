@@ -29,9 +29,6 @@ def create_app(test_config=None):
     app.register_blueprint(patients.bp, url_prefix='/patients')
     app.add_url_rule('/', endpoint='home')
 
-    import os
-from flask import Flask, render_template
-
 
 def create_app(test_config=None):
     # create and configure the app

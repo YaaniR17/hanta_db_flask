@@ -2,7 +2,7 @@ import sqlite3
 from faker import Faker
 import random
 
-fake = Faker('en_GB')  # UK locale for NHS-style data
+fake = Faker('en_GB')
 
 def generate_nhs_number():
     return random.randint(1000000000, 9999999999)
@@ -16,7 +16,7 @@ cursor = conn.cursor()
 
 statuses = ['Confirmed', 'Suspected', 'Recovered', 'Deceased']
 
-for _ in range(20):  # generates 20 fake patients, change this number if you want more
+for _ in range(20):  # generates 20 fake patients
     firstname = fake.first_name()
     lastname = fake.last_name()
     age = random.randint(18, 90)
@@ -35,4 +35,4 @@ for _ in range(20):  # generates 20 fake patients, change this number if you wan
 
 conn.commit()
 conn.close()
-print("Done! 20 fake patients generated.")
+print("20 fake patients generated.")
