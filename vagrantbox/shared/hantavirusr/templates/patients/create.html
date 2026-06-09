@@ -1,9 +1,7 @@
 {% extends 'base.html' %}
-{% block header %}
-  <h1>{% block title %}New Patient Entry{% endblock %}</h1>
-{% endblock %}
+{% block title %}Create Patients Page{% endblock %}
 {% block content %}
-  <form method="post" class="patient-form">
+
   <table class="patient-table" id="patientTable">
     <thead>
       <tr>
@@ -36,17 +34,22 @@
           <td>
             <a class="btn-edit" href="{{ url_for('patients.update', id=patient['ID']) }}">Edit</a>
             <form action="{{ url_for('patients.delete', id=patient['ID']) }}" method="post" style="display: inline;">
-              <input class="btn-delete" type="submit" value="Delete" onclick="return confirm('Are you sure?');">
+              <input class="btn-delete" type="submit" value="Delete" onclick="return confirm('Are you sure you want to permanently delete this Record?');">
             </form>
           </td>
+        </tr>
+      {% else %}
+        <tr>
+          <td colspan="11" style="text-align: center;">No Patients found in the database.</td>
         </tr>
       {% endfor %}
     </tbody>
   </table>
+
   <div class="action-buttons">
-    <a class="action-btn btn-close" href="{{ url_for('patients.index') }}">Back to Patients Page</a>
+    <a class="action-btn" href="{{ url_for('patients.create') }}">New</a>
+    <a class="action-btn btn-close" href="{{ url_for('home') }}">Close</a>
   </div>
 </div>
-    <input type="submit" value="Save Patient Record">
-  </form>
+
 {% endblock %}

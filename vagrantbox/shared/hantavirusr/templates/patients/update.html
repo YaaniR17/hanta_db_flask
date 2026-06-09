@@ -1,48 +1,76 @@
 {% extends 'base.html' %}
 
-{% block header %}
-  <h1>Edit Record for {{ patient['Firstname'] }} {{ patient['Lastname'] }}</h1>
-{% endblock %}
+{% block title %}Update Patient Record Page{% endblock %}
 
 {% block content %}
-  <form method="post" class="patient-form">
-    
-    <label for="firstname">First Name</label>
-    <input name="firstname" id="firstname" value="{{ request.form['firstname'] or patient['Firstname'] }}" required>
+<div class="content">
+  <center><h2>Edit The Record for {{ patient['Firstname'] }} {{ patient['Lastname'] }}</h2></center>
 
-    <label for="lastname">Last Name</label>
-    <input name="lastname" id="lastname" value="{{ request.form['lastname'] or patient['Lastname'] }}" required>
-
-    <label for="age">Age</label>
-    <input type="number" name="age" id="age" value="{{ request.form['age'] or patient['Age'] }}">
-
-    <label for="dob">Date of Birth</label>
-    <input type="date" name="dob" id="dob" value="{{ request.form['dob'] or patient['Date_of_Birth'] }}">
-
-    <label for="phone">Phone Number</label>
-    <input type="tel" name="phone" id="phone" value="{{ request.form['phone'] or patient['Phone_Number'] }}">
-
-    <label for="date_of_admission">Date of Admission</label>
-    <input type="date" name="date_of_admission" id="date_of_admission" value="{{ request.form['date_of_admission'] or patient['Date_of_Admission'] }}" required>
-
-    <label for="ni_number">NI Number</label>
-    <input name="ni_number" id="ni_number" value="{{ request.form['ni_number'] or patient['NI_Number'] }}">
-
-    <label for="nhs_number">NHS Number</label>
-    <input name="nhs_number" id="nhs_number" value="{{ request.form['nhs_number'] or patient['NHS_Number'] }}">
-
-    <label for="infection_status">Infection Status</label>
-    <select name="infection_status" id="infection_status">
-        <option value="Suspected" {% if (request.form['infection_status'] or patient['Infection_Status']) == 'Suspected' %}selected{% endif %}>Suspected Case</option>
-        <option value="Confirmed" {% if (request.form['infection_status'] or patient['Infection_Status']) == 'Confirmed' %}selected{% endif %}>Confirmed Case</option>
-        <option value="Recovered" {% if (request.form['infection_status'] or patient['Infection_Status']) == 'Recovered' %}selected{% endif %}>Recovered / Discharged</option>
-        <option value="Recovered" {% if (request.form['infection_status'] or patient['Infection_Status']) == 'Recovered' %}selected{% endif %}>Deceased</option>
-    </select>
-
-    <input type="submit" value="Save Changes">
+  <form method="post">
+    <table class="patient-table" id="patientTable">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Age</th>
+          <th>Date of Birth</th>
+          <th>Phone Number</th>
+          <th>Date of Admission</th>
+          <th>NI Number</th>
+          <th>NHS Number</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{ patient['ID'] }}</td>
+          <td>
+            <input type="text" name="firstname" value="{{ request.form['firstname'] or patient['Firstname'] }}" required class="form-input-full">
+          </td>
+          <td>
+            <input type="text" name="lastname" value="{{ request.form['lastname'] or patient['Lastname'] }}" required class="form-input-full">
+          </td>
+          <td>
+            <input type="number" name="age" value="{{ request.form['age'] or patient['Age'] }}" class="form-input-small">
+          </td>
+          <td>
+            <input type="date" name="dob" value="{{ request.form['dob'] or patient['Date_of_Birth'] }}" class="form-input-date">
+          </td>
+          <td>
+            <input type="tel" name="phone" value="{{ request.form['phone'] or patient['Phone_Number'] }}" class="form-input-full">
+          </td>
+          <td>
+            <input type="date" name="date_of_admission" value="{{ request.form['date_of_admission'] or patient['Date_of_Admission'] }}" required class="form-input-date">
+          </td>
+          <td>
+            <input type="text" name="ni_number" value="{{ request.form['ni_number'] or patient['National_Insurance_Number'] or patient['NI_Number'] }}" class="form-input-full">
+          </td>
+          <td>
+            <input type="text" name="nhs_number" value="{{ request.form['nhs_number'] or patient['NHS_Number'] }}" class="form-input-full">
+          </td>
+          <td>
+            <select name="infection_status" class="form-select-full">
+              <option value="Suspected" {% if (request.form['infection_status'] or patient['Infection_Status']) == 'Suspected' %}selected{% endif %}>Suspected Case</option>
+              <option value="Confirmed" {% if (request.form['infection_status'] or patient['Infection_Status']) == 'Confirmed' %}selected{% endif %}>Confirmed Case</option>
+              <option value="Recovered" {% if (request.form['infection_status'] or patient['Infection_Status']) == 'Recovered' %}selected{% endif %}>Recovered / Discharged</option>
+              <option value="Deceased" {% if (request.form['infection_status'] or patient['Infection_Status']) == 'Deceased' %}selected{% endif %}>Deceased</option>
+            </select>
+          </td>
+          <td>
+            <input type="submit" value="Save" class="btn-edit form-btn-save">
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </form>
-  <hr>
-  <form action="{{ url_for('patients.delete', id=patient['ID']) }}" method="post">
-    <input class="danger-btn" type="submit" value="Delete Patient Record" onclick="return confirm('Are you sure you want to permanently delete this record?');">
-  </form>
+
+  <div class="action-buttons update-actions">
+    <form action="{{ url_for('patients.delete', id=patient['ID']) }}" method="post">
+      <input class="btn-delete" type="submit" value="Delete Record" onclick="return confirm('Are you sure you want to permanently delete this Record?');">
+    </form>
+    <a class="action-btn btn-close" href="{{ url_for('patients.index') }}">Cancel</a>
+  </div>
+</div>
 {% endblock %}

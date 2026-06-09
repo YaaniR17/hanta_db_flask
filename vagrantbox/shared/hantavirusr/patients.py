@@ -12,9 +12,8 @@ bp = Blueprint('patients', __name__)
 @login_required
 def index():
     db = get_db()
-    patients = db.execute('SELECT * FROM Patients ORDER BY Date_of_Admission DESC').fetchall()
+    patients = db.execute('SELECT * FROM Patients ORDER BY ID ASC').fetchall()
     return render_template('patients/patients.html', patients=patients)
-
 
 # Create:
 @bp.route('/create', methods=('GET', 'POST'))
@@ -24,7 +23,11 @@ def create():
         firstname = request.form['firstname']
         lastname = request.form['lastname']
         age = request.form['age']
+        dob = request.form['dob']
+        phone = request.form['phone']
         date_of_admission = request.form['date_of_admission']
+        ni_number = request.form['ni_number']
+        nhs_number = request.form['nhs_number']
         infection_status = request.form['infection_status']
         error = None
 
@@ -36,7 +39,7 @@ def create():
         else:
             db = get_db()
             db.execute(
-                'INSERT INTO Patients (Firstname, Lastname, Age, Date_of_Admission, Infection_Status)'
+                'INSERT INTO Patients (Firstname, Lastname, Age, Date_of_Birth, Phone_Number, Date_of_Admission, National_Insurance_Number, NHS_Number, Infection_Status)'
                 ' VALUES (?, ?, ?, ?, ?)',
                 (firstname, lastname, age, date_of_admission, infection_status)
             )
@@ -48,7 +51,7 @@ def create():
 # Get Patient:
 def get_patient(id):
     patient = get_db().execute(
-        'SELECT id, Firstname, Lastname, Age, Date_of_Admission, Infection_Status'
+        'SELECT id, Firstname, Lastname, Age, Date_of_Birth, Phone_Number, Date_of_Admission, National_Insurance_Number, NHS_Number, Infection_Status'
         ' FROM Patients'
         ' WHERE id = ?',
         (id,)
@@ -69,7 +72,11 @@ def update(id):
         firstname = request.form['firstname']
         lastname = request.form['lastname']
         age = request.form['age']
+        dob = request.form['dob']
+        phone = request.form['phone']
         date_of_admission = request.form['date_of_admission']
+        ni_number = request.form['ni_number']
+        nhs_number = request.form['nhs_number']
         infection_status = request.form['infection_status']
         error = None
 
