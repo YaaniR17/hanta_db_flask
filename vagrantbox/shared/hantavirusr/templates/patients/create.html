@@ -1,32 +1,52 @@
+{% extends 'base.html' %}
 {% block header %}
   <h1>{% block title %}New Patient Entry{% endblock %}</h1>
-{% block endblock %}
-
+{% endblock %}
 {% block content %}
   <form method="post" class="patient-form">
-    
-    <!-- Names -->
-    <label for="firstname">First Name</label>
-    <input name="firstname" id="firstname" value="{{ request.form['firstname'] or '' }}" required>
-
-    <label for="lastname">Last Name</label>
-    <input name="lastname" id="lastname" value="{{ request.form['lastname'] or '' }}" required>
-
-    <!-- Age and Admission -->
-    <label for="age">Age</label>
-    <input type="number" name="age" id="age" value="{{ request.form['age'] or '' }}">
-
-    <label for="date_of_admission">Date of Admission</label>
-    <input type="date" name="date_of_admission" id="date_of_admission" value="{{ request.form['date_of_admission'] or '' }}" required>
-
-    <!-- Clinical Details -->
-    <label for="infection_status">Infection Status</label>
-    <select name="infection_status" id="infection_status">
-        <option value="Suspected" {% if request.form['infection_status'] == 'Suspected' %}selected{% endif %}>Suspected Case</option>
-        <option value="Confirmed" {% if request.form['infection_status'] == 'Confirmed' %}selected{% endif %}>Confirmed Case</option>
-        <option value="Recovered" {% if request.form['infection_status'] == 'Recovered' %}selected{% endif %}>Recovered / Discharged</option>
-    </select>
-
+  <table class="patient-table" id="patientTable">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Age</th>
+        <th>Date of Birth</th>
+        <th>Phone Number</th>
+        <th>Date of Admission</th>
+        <th>NI Number</th>
+        <th>NHS Number</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for patient in patients %}
+        <tr>
+          <td>{{ patient['ID'] }}</td>
+          <td>{{ patient['Firstname'] }}</td>
+          <td>{{ patient['Lastname'] }}</td>
+          <td>{{ patient['Age'] }}</td>
+          <td>{{ patient['Date_of_Birth'] }}</td>
+          <td>{{ patient['Phone_Number'] }}</td>
+          <td>{{ patient['Date_of_Admission'] }}</td>
+          <td>{{ patient['National_Insurance_Number'] }}</td>
+          <td>{{ patient['NHS_Number'] }}</td>
+          <td>{{ patient['Infection_Status'] }}</td>
+          <td>
+            <a class="btn-edit" href="{{ url_for('patients.update', id=patient['ID']) }}">Edit</a>
+            <form action="{{ url_for('patients.delete', id=patient['ID']) }}" method="post" style="display: inline;">
+              <input class="btn-delete" type="submit" value="Delete" onclick="return confirm('Are you sure?');">
+            </form>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <div class="action-buttons">
+    <a class="action-btn btn-close" href="{{ url_for('patients.index') }}">Back to Patients Page</a>
+  </div>
+</div>
     <input type="submit" value="Save Patient Record">
   </form>
-{% block endblock %}
+{% endblock %}

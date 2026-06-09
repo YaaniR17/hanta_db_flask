@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Home Page{% endblock %}</title>
     <link rel="stylesheet"
-          href="{{ url_for('static', filename='style.css') }}">
+          href="{{ url_for('static', filename='style.css') }}?v=1.1">
 </head>
 <body>
     <header>
@@ -16,8 +16,10 @@
        {% if g.user %}
            <li><span class="user-profile-text">{{ g.user['username'] }}</span></li>
            <li><a href="{{ url_for('home') }}">Home</a></li>
+           <a class="nav-btn" href="{{ url_for('patients.index') }}">Patients</a>
            <li><a href="{{ url_for('auth.logout') }}">Log Out</a></li>
        {% else %}
+       
            <li><a href="{{ url_for('home') }}">Home</a></li>
            <li><a href="{{ url_for('auth.register') }}">Register</a></li>
            <li><a href="{{ url_for('auth.login') }}">Login</a></li>
