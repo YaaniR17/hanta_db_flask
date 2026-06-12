@@ -54,8 +54,8 @@
             <select name="infection_status" class="form-select-full">
               <option value="Suspected" {% if (request.form['infection_status'] or patient['Infection_Status']) == 'Suspected' %}selected{% endif %}>Suspected Case</option>
               <option value="Confirmed" {% if (request.form['infection_status'] or patient['Infection_Status']) == 'Confirmed' %}selected{% endif %}>Confirmed Case</option>
-              <option value="Recovered" {% if (request.form['infection_status'] or patient['Infection_Status']) == 'Recovered' %}selected{% endif %}>Recovered / Discharged</option>
-              <option value="Deceased" {% if (request.form['infection_status'] or patient['Infection_Status']) == 'Deceased' %}selected{% endif %}>Deceased</option>
+              <option value="Recovered" {% if (request.form['infection_status'] or patient['Infection_Status']) == 'Recovered' %}selected{% endif %}>Recovered / Discharged Case</option>
+              <option value="Deceased" {% if (request.form['infection_status'] or patient['Infection_Status']) == 'Deceased' %}selected{% endif %}>Deceased Case</option>
             </select>
           </td>
           <td>

@@ -1,55 +1,54 @@
 {% extends 'base.html' %}
 {% block title %}Create Patients Page{% endblock %}
 {% block content %}
+<div class="content">
+  <center><h2>Create The New Record</h2></center>
 
-  <table class="patient-table" id="patientTable">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Age</th>
-        <th>Date of Birth</th>
-        <th>Phone Number</th>
-        <th>Date of Admission</th>
-        <th>NI Number</th>
-        <th>NHS Number</th>
-        <th>Status</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for patient in patients %}
+  <form action="{{ url_for('patients.create') }}" method="POST">
+    <table class="patient-table" id="patientTable">
+      <thead>
         <tr>
-          <td>{{ patient['ID'] }}</td>
-          <td>{{ patient['Firstname'] }}</td>
-          <td>{{ patient['Lastname'] }}</td>
-          <td>{{ patient['Age'] }}</td>
-          <td>{{ patient['Date_of_Birth'] }}</td>
-          <td>{{ patient['Phone_Number'] }}</td>
-          <td>{{ patient['Date_of_Admission'] }}</td>
-          <td>{{ patient['National_Insurance_Number'] }}</td>
-          <td>{{ patient['NHS_Number'] }}</td>
-          <td>{{ patient['Infection_Status'] }}</td>
+          <th>ID</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Age</th>
+          <th>Date of Birth</th>
+          <th>Phone Number</th>
+          <th>Date of Admission</th>
+          <th>NI Number</th>
+          <th>NHS Number</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><input type="text" name="Firstname" required class="form-input-full"></td>
+          <td><input type="text" name="Lastname" required class="form-input-full"></td>
+          <td><input type="number" name="Age" required class="form-input-small"></td>
+          <td><input type="date" name="Date_of_Birth" required></td>
+          <td><input type="tel" name="Phone_Number" required class="form-input-full"></td>
+          <td><input type="date" name="Date_of_Admission" required></td>
+          <td><input type="text" name="National_Insurance_Number" required class="form-input-full"></td>
+          <td><input type="text" name="NHS_Number" required class="form-input-full"></td>
           <td>
-            <a class="btn-edit" href="{{ url_for('patients.update', id=patient['ID']) }}">Edit</a>
-            <form action="{{ url_for('patients.delete', id=patient['ID']) }}" method="post" style="display: inline;">
-              <input class="btn-delete" type="submit" value="Delete" onclick="return confirm('Are you sure you want to permanently delete this Record?');">
-            </form>
+            <select name="Infection_Status" required class="form-select-full">
+              <option value="Suspected Case">Suspected Case</option>
+              <option value="Confirmed Case">Confirmed Case</option>
+              <option value="Recovered">Recovered / Discharged Case</option>
+              <option value="Deceased">Deceased Case</option>
+            </select>
+          </td>
+          <td>
+            <button type="submit" class="btn-edit form-btn-save">Save</button>
           </td>
         </tr>
-      {% else %}
-        <tr>
-          <td colspan="11" style="text-align: center;">No Patients found in the database.</td>
-        </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+      </tbody>
+    </table>
 
-  <div class="action-buttons">
-    <a class="action-btn" href="{{ url_for('patients.create') }}">New</a>
-    <a class="action-btn btn-close" href="{{ url_for('home') }}">Close</a>
-  </div>
+    <div class="action-buttons">
+      <a class="action-btn btn-close" href="{{ url_for('patients.index') }}">Cancel</a>
+    </div>
+  </form>
 </div>
-
 {% endblock %}
